@@ -1,0 +1,3 @@
+rootProject.name = 'mailchimp-marketing'
+
+include 'sample-app'

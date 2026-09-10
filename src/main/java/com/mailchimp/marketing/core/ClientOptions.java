@@ -49,7 +49,7 @@ public final class ClientOptions {
             {
                 put("X-Fern-Language", "JAVA");
                 put("X-Fern-SDK-Name", "com.mailchimp:mailchimp-marketing");
-                put("X-Fern-SDK-Version", "0.0.119");
+                put("X-Fern-SDK-Version", "0.0.125");
             }
         });
         this.headerSuppliers = headerSuppliers;

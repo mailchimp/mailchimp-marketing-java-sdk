@@ -4,7 +4,7 @@
 package com.mailchimp.marketing.core;
 
 public final class Environment {
-    public static final Environment DEFAULT = new Environment("https://us1.api.mailchimp.com");
+    public static final Environment DEFAULT = new Environment("https://api.mailchimp.com");
 
     private final String url;
 

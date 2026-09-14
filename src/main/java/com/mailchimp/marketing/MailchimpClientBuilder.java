@@ -32,8 +32,6 @@ public class MailchimpClientBuilder {
 
     private Optional<LogConfig> logging = Optional.empty();
 
-    private String serverPrefix;
-
     /**
      * Sets token
      */
@@ -121,11 +119,6 @@ public class MailchimpClientBuilder {
         return this;
     }
 
-    public MailchimpClientBuilder serverPrefix(String serverPrefix) {
-        this.serverPrefix = serverPrefix;
-        return this;
-    }
-
     protected ClientOptions buildClientOptions() {
         ClientOptions.Builder builder = ClientOptions.builder();
         setEnvironment(builder);
@@ -148,18 +141,6 @@ public class MailchimpClientBuilder {
      * @param builder The ClientOptions.Builder to configure
      */
     protected void setEnvironment(ClientOptions.Builder builder) {
-        if (this.serverPrefix != null) {
-            String _serverPrefix = this.serverPrefix != null ? this.serverPrefix : "us1";
-            String _urlTemplate = null;
-            if (this.environment == null) {
-                _urlTemplate = "https://{serverPrefix}.api.mailchimp.com";
-            } else if (this.environment.equals(Environment.DEFAULT)) {
-                _urlTemplate = "https://{serverPrefix}.api.mailchimp.com";
-            }
-            if (_urlTemplate != null) {
-                this.environment = Environment.custom(_urlTemplate.replace("{serverPrefix}", _serverPrefix));
-            }
-        }
         builder.environment(this.environment);
     }
 

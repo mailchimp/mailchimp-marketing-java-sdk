@@ -1,6 +1,5 @@
 # Mailchimp Java Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fmailchimp%2Fmailchimp-marketing-java-sdk)
 [![Maven Central](https://img.shields.io/maven-central/v/com.mailchimp/mailchimp-marketing)](https://central.sonatype.com/artifact/com.mailchimp/mailchimp-marketing)
 
 The Mailchimp Java library provides convenient access to the Mailchimp APIs from Java.
@@ -29,7 +28,7 @@ Add the dependency in your `build.gradle` file:
 
 ```groovy
 dependencies {
-  implementation 'com.mailchimp:mailchimp-marketing:0.0.125'
+  implementation 'com.mailchimp:mailchimp-marketing:0.0.156'
 }
 ```
 
@@ -41,7 +40,7 @@ Add the dependency in your `pom.xml` file:
 <dependency>
   <groupId>com.mailchimp</groupId>
   <artifactId>mailchimp-marketing</artifactId>
-  <version>0.0.125</version>
+  <version>0.0.156</version>
 </dependency>
 ```
 
@@ -57,14 +56,27 @@ Instantiate and use the client with the following:
 package com.example.usage;
 
 import com.mailchimp.marketing.MailchimpClient;
+import com.mailchimp.marketing.resources.accountexports.requests.CreateAccountExportsRequest;
+import com.mailchimp.marketing.resources.accountexports.types.CreateAccountExportsRequestIncludeStagesItem;
+import java.util.Arrays;
 
-MailchimpClient client = MailchimpClient
-    .builder()
-    .token("<token>")
-    .serverPrefix("YOUR_SERVER_PREFIX")
-    .build();
+public class Example {
+    public static void main(String[] args) {
+        MailchimpClient client = MailchimpClient
+            .builder()
+            .token("<token>")
+            .build();
 
-client.accountExports().create(...);
+        client.accountExports().create(
+            CreateAccountExportsRequest
+                .builder()
+                .includeStages(
+                    Arrays.asList(CreateAccountExportsRequestIncludeStagesItem.AUDIENCES, CreateAccountExportsRequestIncludeStagesItem.GALLERY_FILES)
+                )
+                .build()
+        );
+    }
+}
 ```
 
 ## Environments

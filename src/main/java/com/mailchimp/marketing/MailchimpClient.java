@@ -7,6 +7,7 @@ import com.mailchimp.marketing.core.ClientOptions;
 import com.mailchimp.marketing.core.Suppliers;
 import com.mailchimp.marketing.resources.accountexports.AccountExportsClient;
 import com.mailchimp.marketing.resources.activityfeed.ActivityFeedClient;
+import com.mailchimp.marketing.resources.audiences.AudiencesClient;
 import com.mailchimp.marketing.resources.authorizedapps.AuthorizedAppsClient;
 import com.mailchimp.marketing.resources.automations.AutomationsClient;
 import com.mailchimp.marketing.resources.batches.BatchesClient;
@@ -42,6 +43,8 @@ public class MailchimpClient {
     protected final Supplier<AccountExportsClient> accountExportsClient;
 
     protected final Supplier<ActivityFeedClient> activityFeedClient;
+
+    protected final Supplier<AudiencesClient> audiencesClient;
 
     protected final Supplier<AuthorizedAppsClient> authorizedAppsClient;
 
@@ -96,6 +99,7 @@ public class MailchimpClient {
         this.rootClient = Suppliers.memoize(() -> new RootClient(clientOptions));
         this.accountExportsClient = Suppliers.memoize(() -> new AccountExportsClient(clientOptions));
         this.activityFeedClient = Suppliers.memoize(() -> new ActivityFeedClient(clientOptions));
+        this.audiencesClient = Suppliers.memoize(() -> new AudiencesClient(clientOptions));
         this.authorizedAppsClient = Suppliers.memoize(() -> new AuthorizedAppsClient(clientOptions));
         this.automationsClient = Suppliers.memoize(() -> new AutomationsClient(clientOptions));
         this.batchWebhooksClient = Suppliers.memoize(() -> new BatchWebhooksClient(clientOptions));
@@ -132,6 +136,10 @@ public class MailchimpClient {
 
     public ActivityFeedClient activityFeed() {
         return this.activityFeedClient.get();
+    }
+
+    public AudiencesClient audiences() {
+        return this.audiencesClient.get();
     }
 
     public AuthorizedAppsClient authorizedApps() {

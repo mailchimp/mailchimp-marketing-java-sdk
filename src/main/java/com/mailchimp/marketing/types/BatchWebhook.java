@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(builder = BatchWebhook.Builder.class)
-public final class BatchWebhook {
+public final class BatchWebhook implements IBatchWebhook {
     private final Optional<List<List<BatchWebhookLinksItemItem>>> links;
 
     private final Optional<Boolean> enabled;
@@ -28,8 +28,6 @@ public final class BatchWebhook {
     private final Optional<String> id;
 
     private final Optional<Boolean> signingEnabled;
-
-    private final Optional<String> signingSecret;
 
     private final Optional<String> url;
 
@@ -40,14 +38,12 @@ public final class BatchWebhook {
             Optional<Boolean> enabled,
             Optional<String> id,
             Optional<Boolean> signingEnabled,
-            Optional<String> signingSecret,
             Optional<String> url,
             Map<String, Object> additionalProperties) {
         this.links = links;
         this.enabled = enabled;
         this.id = id;
         this.signingEnabled = signingEnabled;
-        this.signingSecret = signingSecret;
         this.url = url;
         this.additionalProperties = additionalProperties;
     }
@@ -64,6 +60,7 @@ public final class BatchWebhook {
      * @return Whether the webhook receives requests or not.
      */
     @JsonProperty("enabled")
+    @java.lang.Override
     public Optional<Boolean> getEnabled() {
         return enabled;
     }
@@ -72,6 +69,7 @@ public final class BatchWebhook {
      * @return A string that uniquely identifies this Batch Webhook.
      */
     @JsonProperty("id")
+    @java.lang.Override
     public Optional<String> getId() {
         return id;
     }
@@ -80,22 +78,16 @@ public final class BatchWebhook {
      * @return Whether outbound deliveries are HMAC-signed.
      */
     @JsonProperty("signing_enabled")
+    @java.lang.Override
     public Optional<Boolean> getSigningEnabled() {
         return signingEnabled;
-    }
-
-    /**
-     * @return The HMAC signing secret. Returned exactly once at creation. This should be stored securely; if lost, delete and recreate the webhook to obtain a new secret.
-     */
-    @JsonProperty("signing_secret")
-    public Optional<String> getSigningSecret() {
-        return signingSecret;
     }
 
     /**
      * @return A valid URL for the Webhook.
      */
     @JsonProperty("url")
+    @java.lang.Override
     public Optional<String> getUrl() {
         return url;
     }
@@ -116,13 +108,12 @@ public final class BatchWebhook {
                 && enabled.equals(other.enabled)
                 && id.equals(other.id)
                 && signingEnabled.equals(other.signingEnabled)
-                && signingSecret.equals(other.signingSecret)
                 && url.equals(other.url);
     }
 
     @java.lang.Override
     public int hashCode() {
-        return Objects.hash(this.links, this.enabled, this.id, this.signingEnabled, this.signingSecret, this.url);
+        return Objects.hash(this.links, this.enabled, this.id, this.signingEnabled, this.url);
     }
 
     @java.lang.Override
@@ -144,8 +135,6 @@ public final class BatchWebhook {
 
         private Optional<Boolean> signingEnabled = Optional.empty();
 
-        private Optional<String> signingSecret = Optional.empty();
-
         private Optional<String> url = Optional.empty();
 
         @JsonAnySetter
@@ -158,7 +147,6 @@ public final class BatchWebhook {
             enabled(other.getEnabled());
             id(other.getId());
             signingEnabled(other.getSigningEnabled());
-            signingSecret(other.getSigningSecret());
             url(other.getUrl());
             return this;
         }
@@ -220,20 +208,6 @@ public final class BatchWebhook {
         }
 
         /**
-         * <p>The HMAC signing secret. Returned exactly once at creation. This should be stored securely; if lost, delete and recreate the webhook to obtain a new secret.</p>
-         */
-        @JsonSetter(value = "signing_secret", nulls = Nulls.SKIP)
-        public Builder signingSecret(Optional<String> signingSecret) {
-            this.signingSecret = signingSecret;
-            return this;
-        }
-
-        public Builder signingSecret(String signingSecret) {
-            this.signingSecret = Optional.ofNullable(signingSecret);
-            return this;
-        }
-
-        /**
          * <p>A valid URL for the Webhook.</p>
          */
         @JsonSetter(value = "url", nulls = Nulls.SKIP)
@@ -248,7 +222,7 @@ public final class BatchWebhook {
         }
 
         public BatchWebhook build() {
-            return new BatchWebhook(links, enabled, id, signingEnabled, signingSecret, url, additionalProperties);
+            return new BatchWebhook(links, enabled, id, signingEnabled, url, additionalProperties);
         }
 
         public Builder additionalProperty(String key, Object value) {

@@ -7,6 +7,7 @@ import com.mailchimp.marketing.core.ClientOptions;
 import com.mailchimp.marketing.core.Suppliers;
 import com.mailchimp.marketing.resources.accountexports.AsyncAccountExportsClient;
 import com.mailchimp.marketing.resources.activityfeed.AsyncActivityFeedClient;
+import com.mailchimp.marketing.resources.audiences.AsyncAudiencesClient;
 import com.mailchimp.marketing.resources.authorizedapps.AsyncAuthorizedAppsClient;
 import com.mailchimp.marketing.resources.automations.AsyncAutomationsClient;
 import com.mailchimp.marketing.resources.batches.AsyncBatchesClient;
@@ -42,6 +43,8 @@ public class AsyncMailchimpClient {
     protected final Supplier<AsyncAccountExportsClient> accountExportsClient;
 
     protected final Supplier<AsyncActivityFeedClient> activityFeedClient;
+
+    protected final Supplier<AsyncAudiencesClient> audiencesClient;
 
     protected final Supplier<AsyncAuthorizedAppsClient> authorizedAppsClient;
 
@@ -96,6 +99,7 @@ public class AsyncMailchimpClient {
         this.rootClient = Suppliers.memoize(() -> new AsyncRootClient(clientOptions));
         this.accountExportsClient = Suppliers.memoize(() -> new AsyncAccountExportsClient(clientOptions));
         this.activityFeedClient = Suppliers.memoize(() -> new AsyncActivityFeedClient(clientOptions));
+        this.audiencesClient = Suppliers.memoize(() -> new AsyncAudiencesClient(clientOptions));
         this.authorizedAppsClient = Suppliers.memoize(() -> new AsyncAuthorizedAppsClient(clientOptions));
         this.automationsClient = Suppliers.memoize(() -> new AsyncAutomationsClient(clientOptions));
         this.batchWebhooksClient = Suppliers.memoize(() -> new AsyncBatchWebhooksClient(clientOptions));
@@ -132,6 +136,10 @@ public class AsyncMailchimpClient {
 
     public AsyncActivityFeedClient activityFeed() {
         return this.activityFeedClient.get();
+    }
+
+    public AsyncAudiencesClient audiences() {
+        return this.audiencesClient.get();
     }
 
     public AsyncAuthorizedAppsClient authorizedApps() {

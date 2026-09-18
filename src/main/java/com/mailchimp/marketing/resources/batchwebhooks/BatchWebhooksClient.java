@@ -11,6 +11,7 @@ import com.mailchimp.marketing.resources.batchwebhooks.requests.DeleteBatchWebho
 import com.mailchimp.marketing.resources.batchwebhooks.requests.GetBatchWebhooksRequest;
 import com.mailchimp.marketing.resources.batchwebhooks.requests.ListBatchWebhooksRequest;
 import com.mailchimp.marketing.resources.batchwebhooks.requests.UpdateBatchWebhooksRequest;
+import com.mailchimp.marketing.resources.batchwebhooks.types.CreateBatchWebhooksResponse;
 import com.mailchimp.marketing.types.BatchWebhook;
 
 public class BatchWebhooksClient {
@@ -61,14 +62,14 @@ public class BatchWebhooksClient {
     /**
      * Configure a webhook that will fire whenever any batch request completes processing.  You may only have a maximum of 20 batch webhooks.
      */
-    public BatchWebhook create(CreateBatchWebhooksRequest request) {
+    public CreateBatchWebhooksResponse create(CreateBatchWebhooksRequest request) {
         return this.rawClient.create(request).body();
     }
 
     /**
      * Configure a webhook that will fire whenever any batch request completes processing.  You may only have a maximum of 20 batch webhooks.
      */
-    public BatchWebhook create(CreateBatchWebhooksRequest request, RequestOptions requestOptions) {
+    public CreateBatchWebhooksResponse create(CreateBatchWebhooksRequest request, RequestOptions requestOptions) {
         return this.rawClient.create(request, requestOptions).body();
     }
 

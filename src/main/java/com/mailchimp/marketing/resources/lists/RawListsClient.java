@@ -86,6 +86,7 @@ import com.mailchimp.marketing.resources.lists.requests.UpdateWebhookListsReques
 import com.mailchimp.marketing.resources.lists.requests.UpsertMemberListsRequest;
 import com.mailchimp.marketing.resources.lists.types.BatchAddOrRemoveMembersListsResponse;
 import com.mailchimp.marketing.resources.lists.types.BatchSubscribeOrUnsubscribeListsResponse;
+import com.mailchimp.marketing.resources.lists.types.CreateWebhookListsResponse;
 import com.mailchimp.marketing.resources.lists.types.ListAbuseReportsListsResponse;
 import com.mailchimp.marketing.resources.lists.types.ListActivityListsResponse;
 import com.mailchimp.marketing.resources.lists.types.ListActivityListsResponseActivityItem;
@@ -6144,14 +6145,15 @@ public class RawListsClient {
     /**
      * Create a new webhook for a specific list.
      */
-    public MailchimpClientHttpResponse<ListWebhooks> createWebhook(String listId, CreateWebhookListsRequest request) {
+    public MailchimpClientHttpResponse<CreateWebhookListsResponse> createWebhook(
+            String listId, CreateWebhookListsRequest request) {
         return createWebhook(listId, request, null);
     }
 
     /**
      * Create a new webhook for a specific list.
      */
-    public MailchimpClientHttpResponse<ListWebhooks> createWebhook(
+    public MailchimpClientHttpResponse<CreateWebhookListsResponse> createWebhook(
             String listId, CreateWebhookListsRequest request, RequestOptions requestOptions) {
         HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl())
                 .newBuilder()
@@ -6195,7 +6197,8 @@ public class RawListsClient {
             String responseBodyString = responseBody != null ? responseBody.string() : "{}";
             if (response.isSuccessful()) {
                 return new MailchimpClientHttpResponse<>(
-                        ObjectMappers.JSON_MAPPER.readValue(responseBodyString, ListWebhooks.class), response);
+                        ObjectMappers.JSON_MAPPER.readValue(responseBodyString, CreateWebhookListsResponse.class),
+                        response);
             }
             Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);
             throw new MailchimpClientApiException(

@@ -78,6 +78,7 @@ import com.mailchimp.marketing.resources.lists.requests.UpdateWebhookListsReques
 import com.mailchimp.marketing.resources.lists.requests.UpsertMemberListsRequest;
 import com.mailchimp.marketing.resources.lists.types.BatchAddOrRemoveMembersListsResponse;
 import com.mailchimp.marketing.resources.lists.types.BatchSubscribeOrUnsubscribeListsResponse;
+import com.mailchimp.marketing.resources.lists.types.CreateWebhookListsResponse;
 import com.mailchimp.marketing.resources.lists.types.ListActivityListsResponseActivityItem;
 import com.mailchimp.marketing.resources.lists.types.ListClientsListsResponse;
 import com.mailchimp.marketing.resources.lists.types.ListLocationsListsResponse;
@@ -2222,14 +2223,15 @@ public class AsyncListsClient {
     /**
      * Create a new webhook for a specific list.
      */
-    public CompletableFuture<ListWebhooks> createWebhook(String listId, CreateWebhookListsRequest request) {
+    public CompletableFuture<CreateWebhookListsResponse> createWebhook(
+            String listId, CreateWebhookListsRequest request) {
         return this.rawClient.createWebhook(listId, request).thenApply(response -> response.body());
     }
 
     /**
      * Create a new webhook for a specific list.
      */
-    public CompletableFuture<ListWebhooks> createWebhook(
+    public CompletableFuture<CreateWebhookListsResponse> createWebhook(
             String listId, CreateWebhookListsRequest request, RequestOptions requestOptions) {
         return this.rawClient.createWebhook(listId, request, requestOptions).thenApply(response -> response.body());
     }

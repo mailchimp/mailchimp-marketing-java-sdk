@@ -19,6 +19,7 @@ import com.mailchimp.marketing.resources.batchwebhooks.requests.DeleteBatchWebho
 import com.mailchimp.marketing.resources.batchwebhooks.requests.GetBatchWebhooksRequest;
 import com.mailchimp.marketing.resources.batchwebhooks.requests.ListBatchWebhooksRequest;
 import com.mailchimp.marketing.resources.batchwebhooks.requests.UpdateBatchWebhooksRequest;
+import com.mailchimp.marketing.resources.batchwebhooks.types.CreateBatchWebhooksResponse;
 import com.mailchimp.marketing.resources.batchwebhooks.types.ListBatchWebhooksResponse;
 import com.mailchimp.marketing.types.BatchWebhook;
 import java.io.IOException;
@@ -170,14 +171,15 @@ public class AsyncRawBatchWebhooksClient {
     /**
      * Configure a webhook that will fire whenever any batch request completes processing.  You may only have a maximum of 20 batch webhooks.
      */
-    public CompletableFuture<MailchimpClientHttpResponse<BatchWebhook>> create(CreateBatchWebhooksRequest request) {
+    public CompletableFuture<MailchimpClientHttpResponse<CreateBatchWebhooksResponse>> create(
+            CreateBatchWebhooksRequest request) {
         return create(request, null);
     }
 
     /**
      * Configure a webhook that will fire whenever any batch request completes processing.  You may only have a maximum of 20 batch webhooks.
      */
-    public CompletableFuture<MailchimpClientHttpResponse<BatchWebhook>> create(
+    public CompletableFuture<MailchimpClientHttpResponse<CreateBatchWebhooksResponse>> create(
             CreateBatchWebhooksRequest request, RequestOptions requestOptions) {
         HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl())
                 .newBuilder()
@@ -214,7 +216,7 @@ public class AsyncRawBatchWebhooksClient {
                                     requestOptions.getMaxRetries().get()))
                     .build();
         }
-        CompletableFuture<MailchimpClientHttpResponse<BatchWebhook>> future = new CompletableFuture<>();
+        CompletableFuture<MailchimpClientHttpResponse<CreateBatchWebhooksResponse>> future = new CompletableFuture<>();
         client.newCall(okhttpRequest).enqueue(new Callback() {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
@@ -222,7 +224,9 @@ public class AsyncRawBatchWebhooksClient {
                     String responseBodyString = responseBody != null ? responseBody.string() : "{}";
                     if (response.isSuccessful()) {
                         future.complete(new MailchimpClientHttpResponse<>(
-                                ObjectMappers.JSON_MAPPER.readValue(responseBodyString, BatchWebhook.class), response));
+                                ObjectMappers.JSON_MAPPER.readValue(
+                                        responseBodyString, CreateBatchWebhooksResponse.class),
+                                response));
                         return;
                     }
                     Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);

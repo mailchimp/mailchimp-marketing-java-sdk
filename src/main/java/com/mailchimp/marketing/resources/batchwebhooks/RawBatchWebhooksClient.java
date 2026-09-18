@@ -19,6 +19,7 @@ import com.mailchimp.marketing.resources.batchwebhooks.requests.DeleteBatchWebho
 import com.mailchimp.marketing.resources.batchwebhooks.requests.GetBatchWebhooksRequest;
 import com.mailchimp.marketing.resources.batchwebhooks.requests.ListBatchWebhooksRequest;
 import com.mailchimp.marketing.resources.batchwebhooks.requests.UpdateBatchWebhooksRequest;
+import com.mailchimp.marketing.resources.batchwebhooks.types.CreateBatchWebhooksResponse;
 import com.mailchimp.marketing.resources.batchwebhooks.types.ListBatchWebhooksResponse;
 import com.mailchimp.marketing.types.BatchWebhook;
 import java.io.IOException;
@@ -140,14 +141,14 @@ public class RawBatchWebhooksClient {
     /**
      * Configure a webhook that will fire whenever any batch request completes processing.  You may only have a maximum of 20 batch webhooks.
      */
-    public MailchimpClientHttpResponse<BatchWebhook> create(CreateBatchWebhooksRequest request) {
+    public MailchimpClientHttpResponse<CreateBatchWebhooksResponse> create(CreateBatchWebhooksRequest request) {
         return create(request, null);
     }
 
     /**
      * Configure a webhook that will fire whenever any batch request completes processing.  You may only have a maximum of 20 batch webhooks.
      */
-    public MailchimpClientHttpResponse<BatchWebhook> create(
+    public MailchimpClientHttpResponse<CreateBatchWebhooksResponse> create(
             CreateBatchWebhooksRequest request, RequestOptions requestOptions) {
         HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl())
                 .newBuilder()
@@ -189,7 +190,8 @@ public class RawBatchWebhooksClient {
             String responseBodyString = responseBody != null ? responseBody.string() : "{}";
             if (response.isSuccessful()) {
                 return new MailchimpClientHttpResponse<>(
-                        ObjectMappers.JSON_MAPPER.readValue(responseBodyString, BatchWebhook.class), response);
+                        ObjectMappers.JSON_MAPPER.readValue(responseBodyString, CreateBatchWebhooksResponse.class),
+                        response);
             }
             Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);
             throw new MailchimpClientApiException(

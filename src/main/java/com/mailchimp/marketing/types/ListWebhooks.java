@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @JsonDeserialize(builder = ListWebhooks.Builder.class)
-public final class ListWebhooks {
+public final class ListWebhooks implements IListWebhooks {
     private final Optional<List<ListWebhooksLinksItem>> links;
 
     private final Optional<ListWebhooksEvents> events;
@@ -30,8 +30,6 @@ public final class ListWebhooks {
     private final Optional<String> listId;
 
     private final Optional<Boolean> signingEnabled;
-
-    private final Optional<String> signingSecret;
 
     private final Optional<ListWebhooksSources> sources;
 
@@ -45,7 +43,6 @@ public final class ListWebhooks {
             Optional<String> id,
             Optional<String> listId,
             Optional<Boolean> signingEnabled,
-            Optional<String> signingSecret,
             Optional<ListWebhooksSources> sources,
             Optional<String> url,
             Map<String, Object> additionalProperties) {
@@ -54,7 +51,6 @@ public final class ListWebhooks {
         this.id = id;
         this.listId = listId;
         this.signingEnabled = signingEnabled;
-        this.signingSecret = signingSecret;
         this.sources = sources;
         this.url = url;
         this.additionalProperties = additionalProperties;
@@ -80,6 +76,7 @@ public final class ListWebhooks {
      * @return An string that uniquely identifies this webhook.
      */
     @JsonProperty("id")
+    @java.lang.Override
     public Optional<String> getId() {
         return id;
     }
@@ -88,6 +85,7 @@ public final class ListWebhooks {
      * @return The unique id for the list.
      */
     @JsonProperty("list_id")
+    @java.lang.Override
     public Optional<String> getListId() {
         return listId;
     }
@@ -96,16 +94,9 @@ public final class ListWebhooks {
      * @return Whether outbound deliveries are HMAC-signed.
      */
     @JsonProperty("signing_enabled")
+    @java.lang.Override
     public Optional<Boolean> getSigningEnabled() {
         return signingEnabled;
-    }
-
-    /**
-     * @return The HMAC signing secret. Returned exactly once at creation. This should be stored securely; if lost, delete and recreate the webhook to obtain a new secret.
-     */
-    @JsonProperty("signing_secret")
-    public Optional<String> getSigningSecret() {
-        return signingSecret;
     }
 
     /**
@@ -120,6 +111,7 @@ public final class ListWebhooks {
      * @return A valid URL for the Webhook.
      */
     @JsonProperty("url")
+    @java.lang.Override
     public Optional<String> getUrl() {
         return url;
     }
@@ -141,22 +133,13 @@ public final class ListWebhooks {
                 && id.equals(other.id)
                 && listId.equals(other.listId)
                 && signingEnabled.equals(other.signingEnabled)
-                && signingSecret.equals(other.signingSecret)
                 && sources.equals(other.sources)
                 && url.equals(other.url);
     }
 
     @java.lang.Override
     public int hashCode() {
-        return Objects.hash(
-                this.links,
-                this.events,
-                this.id,
-                this.listId,
-                this.signingEnabled,
-                this.signingSecret,
-                this.sources,
-                this.url);
+        return Objects.hash(this.links, this.events, this.id, this.listId, this.signingEnabled, this.sources, this.url);
     }
 
     @java.lang.Override
@@ -180,8 +163,6 @@ public final class ListWebhooks {
 
         private Optional<Boolean> signingEnabled = Optional.empty();
 
-        private Optional<String> signingSecret = Optional.empty();
-
         private Optional<ListWebhooksSources> sources = Optional.empty();
 
         private Optional<String> url = Optional.empty();
@@ -197,7 +178,6 @@ public final class ListWebhooks {
             id(other.getId());
             listId(other.getListId());
             signingEnabled(other.getSigningEnabled());
-            signingSecret(other.getSigningSecret());
             sources(other.getSources());
             url(other.getUrl());
             return this;
@@ -274,20 +254,6 @@ public final class ListWebhooks {
         }
 
         /**
-         * <p>The HMAC signing secret. Returned exactly once at creation. This should be stored securely; if lost, delete and recreate the webhook to obtain a new secret.</p>
-         */
-        @JsonSetter(value = "signing_secret", nulls = Nulls.SKIP)
-        public Builder signingSecret(Optional<String> signingSecret) {
-            this.signingSecret = signingSecret;
-            return this;
-        }
-
-        public Builder signingSecret(String signingSecret) {
-            this.signingSecret = Optional.ofNullable(signingSecret);
-            return this;
-        }
-
-        /**
          * <p>The possible sources of any events that can trigger the webhook and whether they are enabled.</p>
          */
         @JsonSetter(value = "sources", nulls = Nulls.SKIP)
@@ -316,8 +282,7 @@ public final class ListWebhooks {
         }
 
         public ListWebhooks build() {
-            return new ListWebhooks(
-                    links, events, id, listId, signingEnabled, signingSecret, sources, url, additionalProperties);
+            return new ListWebhooks(links, events, id, listId, signingEnabled, sources, url, additionalProperties);
         }
 
         public Builder additionalProperty(String key, Object value) {

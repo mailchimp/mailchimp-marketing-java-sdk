@@ -86,6 +86,7 @@ import com.mailchimp.marketing.resources.lists.requests.UpdateWebhookListsReques
 import com.mailchimp.marketing.resources.lists.requests.UpsertMemberListsRequest;
 import com.mailchimp.marketing.resources.lists.types.BatchAddOrRemoveMembersListsResponse;
 import com.mailchimp.marketing.resources.lists.types.BatchSubscribeOrUnsubscribeListsResponse;
+import com.mailchimp.marketing.resources.lists.types.CreateWebhookListsResponse;
 import com.mailchimp.marketing.resources.lists.types.ListAbuseReportsListsResponse;
 import com.mailchimp.marketing.resources.lists.types.ListActivityListsResponse;
 import com.mailchimp.marketing.resources.lists.types.ListActivityListsResponseActivityItem;
@@ -7309,7 +7310,7 @@ public class AsyncRawListsClient {
     /**
      * Create a new webhook for a specific list.
      */
-    public CompletableFuture<MailchimpClientHttpResponse<ListWebhooks>> createWebhook(
+    public CompletableFuture<MailchimpClientHttpResponse<CreateWebhookListsResponse>> createWebhook(
             String listId, CreateWebhookListsRequest request) {
         return createWebhook(listId, request, null);
     }
@@ -7317,7 +7318,7 @@ public class AsyncRawListsClient {
     /**
      * Create a new webhook for a specific list.
      */
-    public CompletableFuture<MailchimpClientHttpResponse<ListWebhooks>> createWebhook(
+    public CompletableFuture<MailchimpClientHttpResponse<CreateWebhookListsResponse>> createWebhook(
             String listId, CreateWebhookListsRequest request, RequestOptions requestOptions) {
         HttpUrl.Builder httpUrl = HttpUrl.parse(this.clientOptions.environment().getUrl())
                 .newBuilder()
@@ -7356,7 +7357,7 @@ public class AsyncRawListsClient {
                                     requestOptions.getMaxRetries().get()))
                     .build();
         }
-        CompletableFuture<MailchimpClientHttpResponse<ListWebhooks>> future = new CompletableFuture<>();
+        CompletableFuture<MailchimpClientHttpResponse<CreateWebhookListsResponse>> future = new CompletableFuture<>();
         client.newCall(okhttpRequest).enqueue(new Callback() {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
@@ -7364,7 +7365,9 @@ public class AsyncRawListsClient {
                     String responseBodyString = responseBody != null ? responseBody.string() : "{}";
                     if (response.isSuccessful()) {
                         future.complete(new MailchimpClientHttpResponse<>(
-                                ObjectMappers.JSON_MAPPER.readValue(responseBodyString, ListWebhooks.class), response));
+                                ObjectMappers.JSON_MAPPER.readValue(
+                                        responseBodyString, CreateWebhookListsResponse.class),
+                                response));
                         return;
                     }
                     Object errorBody = ObjectMappers.parseErrorBody(responseBodyString);

@@ -10,10 +10,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
     public static final ListMemberActivityFeedListsRequestActivityFiltersItem SMS_BULK_SENT =
             new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.SMS_BULK_SENT, "sms_bulk_sent");
 
-    public static final ListMemberActivityFeedListsRequestActivityFiltersItem WHATSAPP_USED_KEYWORD =
-            new ListMemberActivityFeedListsRequestActivityFiltersItem(
-                    Value.WHATSAPP_USED_KEYWORD, "whatsapp_used_keyword");
-
     public static final ListMemberActivityFeedListsRequestActivityFiltersItem ORDER =
             new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.ORDER, "order");
 
@@ -44,10 +40,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
     public static final ListMemberActivityFeedListsRequestActivityFiltersItem LANDING_PAGE_SIGNUP =
             new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.LANDING_PAGE_SIGNUP, "landing_page_signup");
 
-    public static final ListMemberActivityFeedListsRequestActivityFiltersItem WHATSAPP_UNSUBSCRIBE =
-            new ListMemberActivityFeedListsRequestActivityFiltersItem(
-                    Value.WHATSAPP_UNSUBSCRIBE, "whatsapp_unsubscribe");
-
     public static final ListMemberActivityFeedListsRequestActivityFiltersItem EVENT =
             new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.EVENT, "event");
 
@@ -64,9 +56,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
             new ListMemberActivityFeedListsRequestActivityFiltersItem(
                     Value.VIDEO_CALL_TRANSCRIPTS, "video_call_transcripts");
 
-    public static final ListMemberActivityFeedListsRequestActivityFiltersItem WHATSAPP_LINK_CLICK =
-            new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.WHATSAPP_LINK_CLICK, "whatsapp_link_click");
-
     public static final ListMemberActivityFeedListsRequestActivityFiltersItem WHATSAPP_BULK_SENT =
             new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.WHATSAPP_BULK_SENT, "whatsapp_bulk_sent");
 
@@ -82,16 +71,9 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
     public static final ListMemberActivityFeedListsRequestActivityFiltersItem ECOMMERCE_SIGNUP =
             new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.ECOMMERCE_SIGNUP, "ecommerce_signup");
 
-    public static final ListMemberActivityFeedListsRequestActivityFiltersItem WHATSAPP_SUBSCRIPTION_PHONE_UPDATED =
-            new ListMemberActivityFeedListsRequestActivityFiltersItem(
-                    Value.WHATSAPP_SUBSCRIPTION_PHONE_UPDATED, "whatsapp_subscription_phone_updated");
-
     public static final ListMemberActivityFeedListsRequestActivityFiltersItem MARKETING_PERMISSION =
             new ListMemberActivityFeedListsRequestActivityFiltersItem(
                     Value.MARKETING_PERMISSION, "marketing_permission");
-
-    public static final ListMemberActivityFeedListsRequestActivityFiltersItem WHATSAPP_SUBSCRIBE =
-            new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.WHATSAPP_SUBSCRIBE, "whatsapp_subscribe");
 
     public static final ListMemberActivityFeedListsRequestActivityFiltersItem POSTCARD_SENT =
             new ListMemberActivityFeedListsRequestActivityFiltersItem(Value.POSTCARD_SENT, "postcard_sent");
@@ -137,8 +119,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
         switch (value) {
             case SMS_BULK_SENT:
                 return visitor.visitSmsBulkSent();
-            case WHATSAPP_USED_KEYWORD:
-                return visitor.visitWhatsappUsedKeyword();
             case ORDER:
                 return visitor.visitOrder();
             case CLICK:
@@ -159,8 +139,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
                 return visitor.visitUnsub();
             case LANDING_PAGE_SIGNUP:
                 return visitor.visitLandingPageSignup();
-            case WHATSAPP_UNSUBSCRIBE:
-                return visitor.visitWhatsappUnsubscribe();
             case EVENT:
                 return visitor.visitEvent();
             case BOUNCE:
@@ -171,8 +149,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
                 return visitor.visitSurveyResponse();
             case VIDEO_CALL_TRANSCRIPTS:
                 return visitor.visitVideoCallTranscripts();
-            case WHATSAPP_LINK_CLICK:
-                return visitor.visitWhatsappLinkClick();
             case WHATSAPP_BULK_SENT:
                 return visitor.visitWhatsappBulkSent();
             case WEBSITE_SIGNUP:
@@ -183,12 +159,8 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
                 return visitor.visitWhatsappDelivered();
             case ECOMMERCE_SIGNUP:
                 return visitor.visitEcommerceSignup();
-            case WHATSAPP_SUBSCRIPTION_PHONE_UPDATED:
-                return visitor.visitWhatsappSubscriptionPhoneUpdated();
             case MARKETING_PERMISSION:
                 return visitor.visitMarketingPermission();
-            case WHATSAPP_SUBSCRIBE:
-                return visitor.visitWhatsappSubscribe();
             case POSTCARD_SENT:
                 return visitor.visitPostcardSent();
             case CONVERSATION:
@@ -206,8 +178,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
         switch (value) {
             case "sms_bulk_sent":
                 return SMS_BULK_SENT;
-            case "whatsapp_used_keyword":
-                return WHATSAPP_USED_KEYWORD;
             case "order":
                 return ORDER;
             case "click":
@@ -228,8 +198,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
                 return UNSUB;
             case "landing_page_signup":
                 return LANDING_PAGE_SIGNUP;
-            case "whatsapp_unsubscribe":
-                return WHATSAPP_UNSUBSCRIBE;
             case "event":
                 return EVENT;
             case "bounce":
@@ -240,8 +208,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
                 return SURVEY_RESPONSE;
             case "video_call_transcripts":
                 return VIDEO_CALL_TRANSCRIPTS;
-            case "whatsapp_link_click":
-                return WHATSAPP_LINK_CLICK;
             case "whatsapp_bulk_sent":
                 return WHATSAPP_BULK_SENT;
             case "website_signup":
@@ -252,12 +218,8 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
                 return WHATSAPP_DELIVERED;
             case "ecommerce_signup":
                 return ECOMMERCE_SIGNUP;
-            case "whatsapp_subscription_phone_updated":
-                return WHATSAPP_SUBSCRIPTION_PHONE_UPDATED;
             case "marketing_permission":
                 return MARKETING_PERMISSION;
-            case "whatsapp_subscribe":
-                return WHATSAPP_SUBSCRIBE;
             case "postcard_sent":
                 return POSTCARD_SENT;
             case "conversation":
@@ -320,16 +282,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
 
         WHATSAPP_DELIVERED,
 
-        WHATSAPP_LINK_CLICK,
-
-        WHATSAPP_SUBSCRIBE,
-
-        WHATSAPP_SUBSCRIPTION_PHONE_UPDATED,
-
-        WHATSAPP_UNSUBSCRIBE,
-
-        WHATSAPP_USED_KEYWORD,
-
         UNKNOWN
     }
 
@@ -383,16 +335,6 @@ public final class ListMemberActivityFeedListsRequestActivityFiltersItem {
         T visitWhatsappBulkSent();
 
         T visitWhatsappDelivered();
-
-        T visitWhatsappLinkClick();
-
-        T visitWhatsappSubscribe();
-
-        T visitWhatsappSubscriptionPhoneUpdated();
-
-        T visitWhatsappUnsubscribe();
-
-        T visitWhatsappUsedKeyword();
 
         T visitUnknown(String unknownType);
     }

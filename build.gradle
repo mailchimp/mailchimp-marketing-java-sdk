@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
     id 'com.diffplug.spotless' version '6.11.0'
 }
 
@@ -75,10 +76,20 @@ publishing {
             version = '0.0.197'
             from components.java
             pom {
+                name = 'mailchimp-marketing'
+                description = 'The Mailchimp Java library provides convenient access to the Mailchimp Marketing API.'
+                url = 'https://github.com/mailchimp/mailchimp-marketing-java-sdk'
                 licenses {
                     license {
                         name = 'The MIT License (MIT)'
                         url = 'https://mit-license.org/'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'Mailchimp'
+                        organization = 'Mailchimp'
+                        organizationUrl = 'https://mailchimp.com'
                     }
                 }
                 scm {
@@ -98,5 +109,17 @@ publishing {
             }
         }
     }
+}
+
+signing {
+    def signingKeyId = findProperty("signing.keyId")
+    def signingKey = findProperty("signing.key")
+    def signingPassword = findProperty("signing.password")
+    if (signingKey) {
+        useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
+    } else {
+        useGpgCmd()
+    }
+    sign publishing.publications.maven
 }
 

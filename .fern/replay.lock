@@ -30,14 +30,20 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-java-sdk: 4.19.2
-current_generation: 6d6c62265ff4213acff58d54fd8c96d79a29867c
+  - commit_sha: 6ab9e57d65c425beb79fb74a87515a74cd3c7f0e
+    tree_hash: e71e1bad05cb52630bb4655d860d6009f2de77fc
+    timestamp: 2026-09-21T15:11:29.050Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-java-sdk: 4.19.2
+current_generation: 6ab9e57d65c425beb79fb74a87515a74cd3c7f0e
 patches:
   - id: patch-74476fd9
     content_hash: sha256:5aa0ab7d1c9a8fc8707af20bf7b288559814ade3249c18db4e3a761713e2f91a
     original_commit: 74476fd909468f1619560c0695c305eba1437a64
     original_message: Create LICENSE file
     original_author: Keith Baxter <keith_baxter@intuit.com>
-    base_generation: 6d6c62265ff4213acff58d54fd8c96d79a29867c
+    base_generation: 6ab9e57d65c425beb79fb74a87515a74cd3c7f0e
     files:
       - LICENSE
       - NOTICE

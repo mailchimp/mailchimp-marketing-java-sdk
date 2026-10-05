@@ -28,7 +28,7 @@ Add the dependency in your `build.gradle` file:
 
 ```groovy
 dependencies {
-  implementation 'com.mailchimp:mailchimp-marketing:1.0.2'
+  implementation 'com.mailchimp:mailchimp-marketing:1.0.3'
 }
 ```
 
@@ -40,7 +40,7 @@ Add the dependency in your `pom.xml` file:
 <dependency>
   <groupId>com.mailchimp</groupId>
   <artifactId>mailchimp-marketing</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 
